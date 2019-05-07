@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs'
 
+import { OscillatorService } from './oscillator.service'
+
 @Injectable({
   providedIn: 'root'
 })
@@ -32,6 +34,7 @@ export class KeyboardService {
 
 		this.keys[key].down = true
 		this.keys[key].observers.forEach(obs => obs.next(true))
+		this.oscillatorService.noteOn(key)
 	}
 
 	keyUp(key: number) {
@@ -41,7 +44,8 @@ export class KeyboardService {
 
 		this.keys[key].down = false
 		this.keys[key].observers.forEach(obs => obs.next(false))
+		this.oscillatorService.noteOff(key)
 	}
 
-  constructor() { }
+  constructor(private oscillatorService: OscillatorService) { }
 }
