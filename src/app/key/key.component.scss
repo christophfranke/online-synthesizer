@@ -5,13 +5,18 @@ span {
 	display: inline-block;
 	height: 5*$base;
 	width: 1*$base;
-	border: 0.1*$base solid black;
+	border: 0.05*$base solid black;
+	border-left: none;
+	&.left {
+		border-left: 0.05*$base solid black;
+	}
 	&.black {
 		background-color: black;
 		position: absolute;
 		height: 3.2*$base;
 		width: 0.7*$base;
-		transform: translateX(-0.4*$base);
+		transform: translateX(-0.35*$base);
+		border: none;
 	}
 	&.down {
 		background-color: $red

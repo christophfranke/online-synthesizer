@@ -1,5 +1,6 @@
 import { Component, HostListener } from '@angular/core';
 import { KeyboardService } from './keyboard.service'
+import { MidiService } from './midi.service'
 
 const NOTES = {
 	'a': 60,
@@ -28,7 +29,8 @@ const NOTES = {
 export class AppComponent {
   title = 'synth';
 
-  constructor(private keyboardService: KeyboardService) {}
+  constructor(private keyboardService: KeyboardService,
+  	private midiService: MidiService) {}
 
   @HostListener('document:keydown', ['$event'])
   handleKeyDown(event: KeyboardEvent) {

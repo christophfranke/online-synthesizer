@@ -15,7 +15,7 @@ export class KeyboardService {
 	}
 
 	key(key: number) {
-		return new Observable(observer => {
+		return new Observable<boolean>(observer => {
 			if (!this.keys[key]) {
 				this.initKey(key)
 			}
