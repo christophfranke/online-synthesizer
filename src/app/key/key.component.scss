@@ -6,7 +6,6 @@ span {
 	height: 5*$base;
 	width: 1*$base;
 	border: 0.1*$base solid black;
-	transition: color 0.35s;
 	&.black {
 		background-color: black;
 		position: absolute;

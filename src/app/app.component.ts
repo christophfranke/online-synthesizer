@@ -1,4 +1,5 @@
 import { Component, HostListener } from '@angular/core';
+import { KeyboardService } from './keyboard.service'
 
 const NOTES = {
 	'a': 60,
@@ -27,11 +28,21 @@ const NOTES = {
 export class AppComponent {
   title = 'synth';
 
+  constructor(private keyboardService: KeyboardService) {}
+
   @HostListener('document:keydown', ['$event'])
   handleKeyDown(event: KeyboardEvent) {
   	const key = event.key.toLowerCase()
   	if (NOTES[key]) {
-  		console.log('down', key)
+  		this.keyboardService.keyDown(NOTES[key])
+  	}
+  }
+
+  @HostListener('document:keyup', ['$event'])
+  handleKeyUp(event: KeyboardEvent) {
+  	const key = event.key.toLowerCase()
+  	if (NOTES[key]) {
+  		this.keyboardService.keyUp(NOTES[key])
   	}
   }
 }
