@@ -1,0 +1,20 @@
+$base: 1.3vw;
+$red: rgb(196, 41, 80);
+
+span {
+	display: inline-block;
+	height: 5*$base;
+	width: 1*$base;
+	border: 0.1*$base solid black;
+	transition: color 0.35s;
+	&.black {
+		background-color: black;
+		position: absolute;
+		height: 3.2*$base;
+		width: 0.7*$base;
+		transform: translateX(-0.4*$base);
+	}
+	&.down {
+		background-color: $red
+	}
+}
