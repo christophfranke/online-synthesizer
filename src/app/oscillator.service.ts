@@ -25,7 +25,7 @@ export class OscillatorService {
 			const osc = this.audioService.context.createOscillator()
 			const out = this.output.node
 			osc.frequency.value = frequency(pitch)
-			osc.type = this.waveform
+			osc.type = <OscillatorType>this.waveform
 			osc.connect(out)
 			osc.start()
 

@@ -8,7 +8,7 @@ import { AudioService } from '../audio.service'
   styleUrls: ['./master.component.scss']
 })
 export class MasterComponent implements OnInit {
-	volume: number = 0.1
+	volume: number = 0.03
 
 	change() {
 		this.audioService.volume = this.volume
