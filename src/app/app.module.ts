@@ -8,6 +8,8 @@ import { KeyComponent } from './key/key.component';
 import { AdsrComponent } from './adsr/adsr.component';
 import { MasterComponent } from './master/master.component';
 import { FaderComponent } from './fader/fader.component';
+import { SwitchComponent } from './switch/switch.component';
+import { OscillatorComponent } from './oscillator/oscillator.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,9 @@ import { FaderComponent } from './fader/fader.component';
     KeyComponent,
     AdsrComponent,
     MasterComponent,
-    FaderComponent
+    FaderComponent,
+    SwitchComponent,
+    OscillatorComponent
   ],
   imports: [
     BrowserModule,

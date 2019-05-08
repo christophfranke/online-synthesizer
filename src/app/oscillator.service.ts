@@ -10,13 +10,14 @@ const frequency = (pitch: number) => 440 * Math.pow(2, (pitch - 69) / 12)
 export class OscillatorService {
 	output: any
 	tones = {}
+	waveform: string = 'sine'
 
 	noteOn(pitch) {
 		if (!this.tones[pitch]) {		
 			const osc = this.audioService.context.createOscillator()
 			const out = this.output.node
 			osc.frequency.value = frequency(pitch)
-			osc.type = "sawtooth"
+			osc.type = this.waveform
 			osc.connect(out)
 			osc.start()
 			this.output.start(out)
