@@ -14,6 +14,10 @@ export class AudioService {
 		return this._context
 	}
 
+	get currentTime() {
+		return this.context.currentTime
+	}
+
 	connect(node: any) {
 		node.connect(this.context.destination)
 	}
