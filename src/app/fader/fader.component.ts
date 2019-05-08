@@ -15,22 +15,22 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 })
 export class FaderComponent implements OnInit, ControlValueAccessor {
 	value: number
+	slopedValue: number
 
 	@Input()
 	min: number = 0
 	@Input()
 	max: number = 1
 	@Input()
-	slope: number = this.type === 'time' ? 5 : 2
-	@Input()
 	type: string = 'time'
+	slope: number
 	step: number = (this.max - this.min) / 1000
 	
 	@Input()
 	label: string
 
 	applySlope(value: number) {
-		const relativeValue = (this.value - this.min) / (this.max - this.min)
+		const relativeValue = (value - this.min) / (this.max - this.min)
 		const slopedValue = Math.pow(relativeValue, this.slope)
 		return Number(this.min) + slopedValue * (this.max - this.min)
 	}
@@ -56,6 +56,7 @@ export class FaderComponent implements OnInit, ControlValueAccessor {
   constructor() { }
 
   ngOnInit() {
+		this.slope = this.type === 'time' ? 5 : 1.5
   }
 
 }
