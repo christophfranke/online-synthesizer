@@ -11,6 +11,14 @@ export class OscillatorService {
 	output: any
 	tones = {}
 	waveform: string = 'sine'
+	detune: {
+		amount: number,
+		frequency: number
+	} = {
+		amount: 20,
+		frequency: 4
+	}
+
 
 	noteOn(pitch) {
 		if (!this.tones[pitch]) {		
@@ -20,6 +28,16 @@ export class OscillatorService {
 			osc.type = this.waveform
 			osc.connect(out)
 			osc.start()
+
+			if (this.detune.amount > 0) {			
+				const lfo = this.audioService.context.createOscillator()
+				lfo.frequency.value = this.detune.frequency
+				const lfoGain = this.audioService.context.createGain()
+				lfoGain.gain.value = this.detune.amount
+				lfo.connect(lfoGain)
+				lfoGain.connect(osc.detune)
+				lfo.start()
+			}
 			this.output.start(out)
 
 			this.tones[pitch] = { osc, out }

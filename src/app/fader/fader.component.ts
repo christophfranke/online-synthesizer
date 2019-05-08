@@ -56,7 +56,13 @@ export class FaderComponent implements OnInit, ControlValueAccessor {
   constructor() { }
 
   ngOnInit() {
-		this.slope = this.type === 'time' ? 5 : 1.5
+  	this.slope = 1
+  	if (this.type === 'type') {
+  		this.slope = 5
+  	}
+  	if (this.type === 'gain') {
+  		this.slope = 1.5
+  	}
   }
 
 }

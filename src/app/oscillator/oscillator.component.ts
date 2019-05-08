@@ -9,15 +9,23 @@ import { OscillatorService } from '../oscillator.service'
 })
 export class OscillatorComponent implements OnInit {
 	waveform: string
+	detuneAmount: number
+	detuneFrequency: number
 
 	update() {
 		this.oscillatorService.waveform = this.waveform
+		this.oscillatorService.detune = {
+			amount: this.detuneAmount,
+			frequency: this.detuneFrequency
+		}
 	}
 
   constructor(private oscillatorService: OscillatorService) { }
 
   ngOnInit() {
   	this.waveform = this.oscillatorService.waveform
+  	this.detuneAmount = this.oscillatorService.detune.amount
+  	this.detuneFrequency = this.oscillatorService.detune.frequency
   }
 
 }
