@@ -16,6 +16,7 @@ export class OscillatorService {
 			const osc = this.audioService.context.createOscillator()
 			const out = this.output.node
 			osc.frequency.value = frequency(pitch)
+			osc.type = "sawtooth"
 			osc.connect(out)
 			osc.start()
 			this.output.start(out)
