@@ -1,0 +1,6 @@
+<div>
+	<app-fader [(ngModel)]="attack" (change)="updateService()" label="Attack" min="0.001" max="10"></app-fader><br>
+	<app-fader [(ngModel)]="decay" (change)="updateService()" label="Decay" min="0.001" max="10"></app-fader><br>
+	<app-fader [(ngModel)]="sustain" (change)="updateService()" label="Sustain" min="0.001" max="1"></app-fader><br>
+	<app-fader [(ngModel)]="release" (change)="updateService()" label="Release" min="0.001" max="10"></app-fader><br>
+</div>

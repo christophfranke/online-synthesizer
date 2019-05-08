@@ -34,6 +34,13 @@ export class AdsrService {
 		})
 	}
 
+	update({ attack, decay, sustain, release }: { attack: number, decay: number, sustain: number, release: number }) {
+		this.attack = attack
+		this.decay = decay
+		this.sustain = sustain
+		this.release = release
+	}
+
   constructor(private audioService: AudioService) {
   	this.attack = 0.01
   	this.sustain = 0.5
