@@ -12,7 +12,7 @@ export class AdsrService {
 
 	get node() {
 		const gain = this.audioService.context.createGain()
-		gain.connect(this.audioService.context.destination)
+		gain.connect(this.audioService.master)
 
 		return gain
 	}
@@ -28,7 +28,7 @@ export class AdsrService {
 			gain.gain.cancelScheduledValues(this.audioService.currentTime)
 			gain.gain.exponentialRampToValueAtTime(1e-3, this.audioService.currentTime + this.release)
 			setTimeout(() => {
-				gain.disconnect(this.audioService.context.destination)
+				gain.disconnect(this.audioService.master)
 				resolve()
 			}, 1000*this.release)
 		})

@@ -21,7 +21,9 @@ export class FaderComponent implements OnInit, ControlValueAccessor {
 	@Input()
 	max: number = 1
 	@Input()
-	slope: number = 5
+	slope: number = this.type === 'time' ? 5 : 2
+	@Input()
+	type: string = 'time'
 	step: number = (this.max - this.min) / 1000
 	
 	@Input()

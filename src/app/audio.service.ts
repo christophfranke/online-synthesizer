@@ -5,6 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class AudioService {
 	_context: AudioContext
+	_gain: any
 
 	get context() {
 		if (!this._context) {
@@ -18,12 +19,17 @@ export class AudioService {
 		return this.context.currentTime
 	}
 
-	connect(node: any) {
-		node.connect(this.context.destination)
+	get master() {
+		if (!this._gain) {
+			this._gain = this.context.createGain()
+			this._gain.connect(this.context.destination)
+		}
+
+		return this._gain
 	}
 
-	disconnect(node: any) {
-		node.disconnect(this.context.destination)
+	set volume(value) {
+		this.master.gain.value = value
 	}
 
   constructor() { }
