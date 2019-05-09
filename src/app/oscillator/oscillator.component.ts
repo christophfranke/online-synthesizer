@@ -11,8 +11,10 @@ export class OscillatorComponent implements OnInit {
 	waveform: string
 	detuneAmount: number
 	detuneFrequency: number
+	mode: string
 
 	update() {
+		this.oscillatorService.mode = this.mode
 		this.oscillatorService.waveform = this.waveform
 		this.oscillatorService.detune = {
 			amount: this.detuneAmount,
@@ -26,6 +28,7 @@ export class OscillatorComponent implements OnInit {
   	this.waveform = this.oscillatorService.waveform
   	this.detuneAmount = this.oscillatorService.detune.amount
   	this.detuneFrequency = this.oscillatorService.detune.frequency
+  	this.mode = this.oscillatorService.mode
   }
 
 }

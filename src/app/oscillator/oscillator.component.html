@@ -1,4 +1,5 @@
 <div>
+	<app-switch [(ngModel)]="mode" [options]="['mono', 'poly']" label="Polyphony" (change)="update()"></app-switch>
 	<app-switch [(ngModel)]="waveform" [options]="['sine', 'sawtooth', 'square', 'triangle']" label="Waveform" (change)="update()"></app-switch>
 	<app-fader [(ngModel)]="detuneAmount" (change)="update()" label="Detune Amount" min="0" max="100"></app-fader>
 	<app-fader [(ngModel)]="detuneFrequency" (change)="update()" label="Detune Rate" min="0.001" max="10"></app-fader>
