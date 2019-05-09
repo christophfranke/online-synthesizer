@@ -1,0 +1,23 @@
+.osc {
+	display: flex;
+	width: 30vw;
+	padding: 20px;
+	margin-bottom: 30px;
+	border: 1px solid black;
+	flex-wrap: wrap;
+	h2 {
+		width: 100%;
+		text-align: center;
+		margin: 0;
+	}
+	h3 {
+		text-align: center;
+	}
+	.sub {
+		text-align: center;
+		width: 45%;
+		@media (max-width: 500px) {
+			width: 100%;
+		}
+	}
+}

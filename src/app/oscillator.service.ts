@@ -38,9 +38,10 @@ export class OscillatorService {
 
 	noteOn(pitch) {
 		if (!this.tones[pitch]) {
+			let osc, output
 			if (this.mode === 'poly' || this.downNotes.length === 0) {			
-				const osc = this.audioService.context.createOscillator()
-				const output = this.output.note(osc)
+				osc = this.audioService.context.createOscillator()
+				output = this.output.note(osc)
 				osc.frequency.value = frequency(pitch)
 				osc.type = <OscillatorType>this.waveform
 				osc.start()
@@ -58,7 +59,8 @@ export class OscillatorService {
 
 				this.downNotes.push({ osc, output, pitch })
 			} else {
-				const { osc, output } = this.downNotes[0]
+				osc = this.downNotes[0].osc
+				output = this.downNotes[0].oscillator
 				osc.frequency.value = frequency(pitch)
 				this.downNotes.push({ osc, output, pitch })
 			}
