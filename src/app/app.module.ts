@@ -10,6 +10,7 @@ import { MasterComponent } from './master/master.component';
 import { FaderComponent } from './fader/fader.component';
 import { SwitchComponent } from './switch/switch.component';
 import { OscillatorComponent } from './oscillator/oscillator.component';
+import { FilterComponent } from './filter/filter.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { OscillatorComponent } from './oscillator/oscillator.component';
     MasterComponent,
     FaderComponent,
     SwitchComponent,
-    OscillatorComponent
+    OscillatorComponent,
+    FilterComponent
   ],
   imports: [
     BrowserModule,

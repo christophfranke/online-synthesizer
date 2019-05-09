@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AudioService } from './audio.service'
-import { AdsrService } from './adsr.service'
+import { FilterService } from './filter.service'
 
 const frequency = (pitch: number) => 440 * Math.pow(2, (pitch - 69) / 12)
 
@@ -19,14 +19,12 @@ export class OscillatorService {
 		frequency: 4
 	}
 
-
 	noteOn(pitch) {
 		if (!this.tones[pitch]) {		
 			const osc = this.audioService.context.createOscillator()
-			const out = this.output.node
+			const output = this.output.note(osc)
 			osc.frequency.value = frequency(pitch)
 			osc.type = <OscillatorType>this.waveform
-			osc.connect(out)
 			osc.start()
 
 			if (this.detune.amount > 0) {			
@@ -38,26 +36,24 @@ export class OscillatorService {
 				lfoGain.connect(osc.detune)
 				lfo.start()
 			}
-			this.output.start(out)
+			output.noteOn()
 
-			this.tones[pitch] = { osc, out }
+			this.tones[pitch] = { osc, output }
 		}
 	}
 
 	noteOff(pitch) {
 		if (this.tones[pitch]) {
-			const { osc, out } = this.tones[pitch]
-			this.output.stop(out).then(() => {			
+			const { osc, output } = this.tones[pitch]
+			output.noteOff(() => {
 				osc.stop()
-				osc.disconnect(out)
 			})
-
 			delete this.tones[pitch]
 		}
 	}
 
   constructor(private audioService: AudioService,
-  	private adsrService: AdsrService) {
-  	this.output = this.adsrService
+  	private filterService: FilterService) {
+  	this.output = this.filterService
   }
 }

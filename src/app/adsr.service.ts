@@ -10,28 +10,31 @@ export class AdsrService {
 	sustain: number
 	release: number
 
-	get node() {
+	output: any
+
+	note(from: AudioNode) {
 		const gain = this.audioService.context.createGain()
-		gain.connect(this.audioService.master)
+		const output = this.output.note(gain)
 
-		return gain
-	}
-
-	start(gain: any) {
-		gain.gain.setValueAtTime(1e-3, this.audioService.currentTime)
-		gain.gain.exponentialRampToValueAtTime(1, this.audioService.currentTime + this.attack)
-		gain.gain.exponentialRampToValueAtTime(this.sustain, this.audioService.currentTime + this.attack + this.decay)
-	}
-
-	stop(gain: any) {
-		return new Promise(resolve => {
-			gain.gain.cancelScheduledValues(this.audioService.currentTime)
-			gain.gain.exponentialRampToValueAtTime(1e-3, this.audioService.currentTime + this.release)
-			setTimeout(() => {
-				gain.disconnect(this.audioService.master)
-				resolve()
-			}, 1000*this.release)
-		})
+		return {
+			noteOn: () => {
+				from.connect(gain)
+				gain.gain.setValueAtTime(1e-3, this.audioService.currentTime)
+				gain.gain.exponentialRampToValueAtTime(1, this.audioService.currentTime + this.attack)
+				gain.gain.exponentialRampToValueAtTime(this.sustain, this.audioService.currentTime + this.attack + this.decay)
+				output.noteOn()
+			},
+			noteOff: (fn) => {
+				gain.gain.cancelScheduledValues(this.audioService.currentTime)
+				gain.gain.exponentialRampToValueAtTime(1e-3, this.audioService.currentTime + this.release)
+				setTimeout(() => {
+					output.noteOff(() => {
+						from.disconnect(gain)
+						fn()
+					})
+				}, 1000*this.release)
+			}
+		}
 	}
 
 	update({ attack, decay, sustain, release }: { attack: number, decay: number, sustain: number, release: number }) {
@@ -46,5 +49,7 @@ export class AdsrService {
   	this.sustain = 0.5
   	this.decay = 0.07
   	this.release = 1.5
+
+  	this.output = this.audioService
   }
 }

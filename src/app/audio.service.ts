@@ -19,6 +19,18 @@ export class AudioService {
 		return this.context.currentTime
 	}
 
+	note(from: AudioNode) {
+		return {
+			noteOn: () => {
+				from.connect(this.master)
+			},
+			noteOff: (fn) => {
+				from.disconnect(this.master)
+				fn()
+			}
+		}
+	}
+
 	get master() {
 		if (!this._gain) {
 			this._gain = this.context.createGain()
