@@ -12,7 +12,7 @@ export class OscillatorService {
 	tones = {}
 	waveform: string = 'sawtooth'
 	_mode: string = 'poly'
-	detune: {
+	_detune: {
 		amount: number,
 		frequency: number
 	} = {
@@ -38,6 +38,20 @@ export class OscillatorService {
 		}
 
 		this._mode = value
+	}
+
+	set detuneAmount(value) {
+		this._detune.amount = value
+		Object.values(this.downNotes).forEach(note => note.updateDetuneAmount(value))
+	}
+
+	set detuneFrequency(value) {
+		this._detune.frequency = value
+		Object.values(this.downNotes).forEach(note => note.updateDetuneFrequency(value))
+	}
+
+	get detune() {
+		return this._detune
 	}
 
 	note(pitch) {
@@ -77,11 +91,20 @@ export class OscillatorService {
 				pitch: newPitch
 			}
 		}
+		const updateDetuneAmount = value => {
+			lfoGain.gain.value = value
+		}
+		const updateDetuneFrequency = value => {
+			lfo.frequency.value = value
+		}
+
 
 		return {
 			noteOn,
 			noteOff,
 			changeTo,
+			updateDetuneFrequency,
+			updateDetuneAmount,
 			pitch
 		}
 	}

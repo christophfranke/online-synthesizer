@@ -16,10 +16,8 @@ export class OscillatorComponent implements OnInit {
 	update() {
 		this.oscillatorService.mode = this.mode
 		this.oscillatorService.waveform = this.waveform
-		this.oscillatorService.detune = {
-			amount: this.detuneAmount,
-			frequency: this.detuneFrequency
-		}
+		this.oscillatorService.detuneAmount = this.detuneAmount
+		this.oscillatorService.detuneFrequency = this.detuneFrequency
 	}
 
   constructor(private oscillatorService: OscillatorService) { }
