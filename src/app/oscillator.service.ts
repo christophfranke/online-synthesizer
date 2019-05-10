@@ -60,7 +60,7 @@ export class OscillatorService {
 				this.downNotes.push({ osc, output, pitch })
 			} else {
 				osc = this.downNotes[0].osc
-				output = this.downNotes[0].oscillator
+				output = this.downNotes[0].output
 				osc.frequency.value = frequency(pitch)
 				this.downNotes.push({ osc, output, pitch })
 			}

@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class AudioService {
 	_context: AudioContext
-	_gain: any
+	_gain: GainNode
 
 	get context() {
 		if (!this._context) {
@@ -44,5 +44,11 @@ export class AudioService {
 		this.master.gain.value = value
 	}
 
-  constructor() { }
+	get volume() {
+		return this.master.gain.value
+	}
+
+  constructor() {
+  	this.volume = 0.1
+  }
 }

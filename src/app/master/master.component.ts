@@ -8,7 +8,7 @@ import { AudioService } from '../audio.service'
   styleUrls: ['./master.component.scss']
 })
 export class MasterComponent implements OnInit {
-	volume: number = 0.03
+	volume: number
 
 	change() {
 		this.audioService.volume = this.volume
@@ -17,7 +17,7 @@ export class MasterComponent implements OnInit {
   constructor(private audioService: AudioService) { }
 
   ngOnInit() {
-  	this.change()
+  	this.volume = this.audioService.volume
   }
 
 }
