@@ -108,6 +108,9 @@ export class FaderComponent implements OnInit, ControlValueAccessor {
   	if (this.type === 'gain') {
   		this.slope = 1.5
   	}
+  	if (this.type === 'frequency') {
+  		this.slope = 5
+  	}
   }
 
 }

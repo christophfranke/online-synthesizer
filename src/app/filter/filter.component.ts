@@ -8,17 +8,17 @@ import { FilterService } from '../filter.service'
 })
 export class FilterComponent implements OnInit {
 	cutoff: number
-	q: number
+	resonance: number
 
   constructor(private filterService: FilterService) { }
 
   update() {
   	this.filterService.frequency = this.cutoff
-  	this.filterService.q = this.q
+  	this.filterService.resonance = this.resonance
   }
 
   ngOnInit() {
   	this.cutoff = this.filterService.frequency
-  	this.q = this.filterService.q
+  	this.resonance = this.filterService.resonance
   }
 }

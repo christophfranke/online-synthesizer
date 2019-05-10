@@ -6,10 +6,11 @@ import { AudioService } from './audio.service'
   providedIn: 'root'
 })
 export class FilterService {
-	q: number = 1
+	_resonance: number = 1
 	_frequency: number = 2000
 	output: any
-	_offset: ConstantSourceNode
+	_frequencyControl: ConstantSourceNode
+	_resonanceControl: ConstantSourceNode
 
 	get frequency() {
 		return this._frequency
@@ -17,37 +18,58 @@ export class FilterService {
 
 	set frequency(value: number) {
 		this._frequency = value
-		this.offset.offset.setValueAtTime(value, this.audioService.currentTime)
-		this.offset.offset.value = this.frequency
+		this.frequencyControl.offset.setValueAtTime(value, this.audioService.currentTime)
+		this.frequencyControl.offset.value = this.frequency
 	}
 
-	get offset() {
-		if (!this._offset) {
-			this._offset = this.audioService.context.createConstantSource()
-			this._offset.offset.value = this.frequency
-			this._offset.start()
+	get frequencyControl() {
+		if (!this._frequencyControl) {
+			this._frequencyControl = this.audioService.context.createConstantSource()
+			this._frequencyControl.offset.value = this.frequency
+			this._frequencyControl.start()
 		}
 
-		return this._offset
+		return this._frequencyControl
+	}
+
+	get resonanceControl() {
+		if (!this._resonanceControl) {
+			this._resonanceControl = this.audioService.context.createConstantSource()
+			this._resonanceControl.offset.value = this.resonance
+			this._resonanceControl.start()
+		}
+
+		return this._resonanceControl
+	}
+
+	get resonance() {
+		return this._resonance
+	}
+
+	set resonance(value: number) {
+		this._resonance = value
+		this.resonanceControl.offset.value = this.resonance
 	}
 
 	note(from: AudioNode) {
 		const filter = this.audioService.context.createBiquadFilter()
-		filter.Q.value = this.q
+		filter.Q.value = 0
 		filter.frequency.value = 0
 		filter.type = 'lowpass'
 		const output = this.output.note(filter)
 
 		return {
 			noteOn: () => {
-				this.offset.connect(filter.frequency)
+				this.frequencyControl.connect(filter.frequency)
+				this.resonanceControl.connect(filter.Q)
 				from.connect(filter)
 				output.noteOn()
 			},
 			noteOff: (fn) => {
 				output.noteOff(() => {
 					from.disconnect(filter)
-					this.offset.disconnect(filter.frequency)
+					this.frequencyControl.disconnect(filter.frequency)
+					this.resonanceControl.disconnect(filter.Q)
 					fn()
 				})
 			}

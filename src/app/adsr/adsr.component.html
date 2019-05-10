@@ -1,9 +1,9 @@
 <div class="adsr">
 	<h2>Amplifier</h2>
 	<div class="sub">
-		<app-fader [(ngModel)]="attack" (change)="updateService()" label="Attack" min="0.001" max="10" type="time"></app-fader>
-		<app-fader [(ngModel)]="decay" (change)="updateService()" label="Decay" min="0.001" max="10" type="time"></app-fader>
+		<app-fader [(ngModel)]="attack" (change)="updateService()" label="Attack" min="0.005" max="10" type="time"></app-fader>
+		<app-fader [(ngModel)]="decay" (change)="updateService()" label="Decay" min="0.005" max="10" type="time"></app-fader>
 		<app-fader [(ngModel)]="sustain" (change)="updateService()" label="Sustain" min="0.001" max="1" type="gain"></app-fader>
-		<app-fader [(ngModel)]="release" (change)="updateService()" label="Release" min="0.001" max="10" type="time"></app-fader>
+		<app-fader [(ngModel)]="release" (change)="updateService()" label="Release" min="0.005" max="10" type="time"></app-fader>
 	</div>
 </div>

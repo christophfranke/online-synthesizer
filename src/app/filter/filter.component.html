@@ -2,6 +2,6 @@
 	<h2>Filter</h2>
 	<div class="sub">
 		<app-fader label="Cutoff" [(ngModel)]="cutoff" min="20" max="22000" type="frequency" (change)="update()"></app-fader>
-		<app-fader label="Q" [(ngModel)]="q" min="0.0001" max="50" (change)="update()"></app-fader>
+		<app-fader label="Resonance" [(ngModel)]="resonance" min="0.0001" max="50" (change)="update()"></app-fader>
 	</div>
 </div>
