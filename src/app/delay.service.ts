@@ -70,5 +70,9 @@ export class DelayService {
 
   constructor(private audioService: AudioService) {
   	this.output = this.audioService
+
+  	// need to touch them here or it doesnt work for no reason :/
+  	this.feedback = this.feedback
+  	this.time = this.time
   }
 }

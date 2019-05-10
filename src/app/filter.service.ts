@@ -18,13 +18,14 @@ export class FilterService {
 	set frequency(value: number) {
 		this._frequency = value
 		this.offset.offset.setValueAtTime(value, this.audioService.currentTime)
-		// this.offset.offset.value = this.frequency
+		this.offset.offset.value = this.frequency
 	}
 
 	get offset() {
 		if (!this._offset) {
 			this._offset = this.audioService.context.createConstantSource()
 			this._offset.offset.value = this.frequency
+			this._offset.start()
 		}
 
 		return this._offset
@@ -33,7 +34,7 @@ export class FilterService {
 	note(from: AudioNode) {
 		const filter = this.audioService.context.createBiquadFilter()
 		filter.Q.value = this.q
-		filter.frequency.value = this.frequency
+		filter.frequency.value = 0
 		filter.type = 'lowpass'
 		const output = this.output.note(filter)
 
