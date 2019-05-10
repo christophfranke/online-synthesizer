@@ -71,7 +71,7 @@ export class FaderComponent implements OnInit, ControlValueAccessor {
 	}
 
 	get roundedValue() {
-		return Math.round(100*this.value) / 100
+		return Math.round(100*this.applySlope(this.value)) / 100
 	}
 
 	applySlope(value: number) {
@@ -102,8 +102,8 @@ export class FaderComponent implements OnInit, ControlValueAccessor {
 
   ngOnInit() {
   	this.slope = 1
-  	if (this.type === 'type') {
-  		this.slope = 5
+  	if (this.type === 'time') {
+  		this.slope = 3
   	}
   	if (this.type === 'gain') {
   		this.slope = 1.5

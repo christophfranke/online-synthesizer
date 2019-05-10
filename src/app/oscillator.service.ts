@@ -10,8 +10,8 @@ const frequency = (pitch: number) => 440 * Math.pow(2, (pitch - 69) / 12)
 export class OscillatorService {
 	output: any
 	tones = {}
-	waveform: string = 'sine'
-	_mode: string = 'mono'
+	waveform: string = 'sawtooth'
+	_mode: string = 'poly'
 	detune: {
 		amount: number,
 		frequency: number
