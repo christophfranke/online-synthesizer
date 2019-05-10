@@ -9,11 +9,12 @@ export class DelayService {
 	_feedback: number = 0.7
 	_time: number = 0.5
 	_delay: DelayNode
+	_gain: GainNode
 
 	get delay() {
 		if (!this._delay) {
 			this._delay = this.audioService.context.createDelay()
-			this._delay.delayTime.value = this._time
+			this._delay.delayTime.value = this.time
 			this._delay.connect(this.gain)
 			this.gain.connect(this._delay)
 			const output = this.output.note(this._delay)
@@ -34,7 +35,7 @@ export class DelayService {
 
 	set time(value: number) {
 		this._time = value
-		this.delay.delayTime.value = this._time
+		this.delay.delayTime.value = this.time
 	}
 
 	get time() {
@@ -55,12 +56,12 @@ export class DelayService {
 
 		return {
 			noteOn: () => {
-				from.connect(this.delay)
+				from.connect(this.gain)
 				output.noteOn()
 			},
 			noteOff: (fn) => {
 				output.noteOff(() => {
-					from.disconnect(this.delay)
+					from.disconnect(this.gain)
 					fn()
 				})
 			}
