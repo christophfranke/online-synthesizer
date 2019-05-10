@@ -6,7 +6,7 @@ import { AudioService } from './audio.service'
 })
 export class DelayService {
 	output: any
-	_feedback: number = 0.7
+	_feedback: number = 0.2
 	_time: number = 0.5
 	_delay: DelayNode
 	_gain: GainNode
