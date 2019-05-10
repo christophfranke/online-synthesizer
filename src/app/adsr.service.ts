@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AudioService } from './audio.service'
+import { DelayService } from './delay.service'
 
 @Injectable({
   providedIn: 'root'
@@ -44,12 +45,13 @@ export class AdsrService {
 		this.release = release
 	}
 
-  constructor(private audioService: AudioService) {
+  constructor(private audioService: AudioService,
+  	private delayService: DelayService) {
   	this.attack = 0.01
   	this.sustain = 0.5
   	this.decay = 0.07
   	this.release = 1.5
 
-  	this.output = this.audioService
+  	this.output = this.delayService
   }
 }

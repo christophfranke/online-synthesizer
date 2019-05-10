@@ -70,6 +70,10 @@ export class FaderComponent implements OnInit, ControlValueAccessor {
 		return (this.value - this.min) / (this.max - this.min)
 	}
 
+	get roundedValue() {
+		return Math.round(100*this.value) / 100
+	}
+
 	applySlope(value: number) {
 		const relativeValue = (value - this.min) / (this.max - this.min)
 		const slopedValue = Math.pow(relativeValue, this.slope)
