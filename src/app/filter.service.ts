@@ -56,7 +56,7 @@ export class FilterService {
 		filter.Q.value = 0
 		filter.frequency.value = 0
 		filter.type = 'lowpass'
-		const output = this.output.note(filter)
+		const output = this.output.note(filter, filter)
 
 		return {
 			noteOn: () => {

@@ -11,6 +11,7 @@ export class AdsrComponent implements OnInit {
 	decay: number
 	sustain: number
 	release: number
+	filter: number
 
   constructor(private adsrService: AdsrService) { }
 
@@ -19,7 +20,8 @@ export class AdsrComponent implements OnInit {
   		attack: this.attack,
   		decay: this.decay,
   		sustain: this.sustain,
-  		release: this.release
+  		release: this.release,
+  		filter: this.filter
   	})
   }
 
@@ -28,6 +30,7 @@ export class AdsrComponent implements OnInit {
   	this.decay = this.adsrService.decay
   	this.sustain = this.adsrService.sustain
   	this.release = this.adsrService.release
+    this.filter = this.adsrService.filter
   }
 
 }
