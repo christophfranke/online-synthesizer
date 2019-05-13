@@ -14,7 +14,7 @@ export class AdsrService {
 
 	output: any
 
-	_filterAmount: GainNode
+	_filterAmount: ConstantSourceNode
 
 	get filterAmount() {
 		if (!this._filterAmount) {
